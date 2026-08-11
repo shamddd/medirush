@@ -1,0 +1,12 @@
+{
+  "name": "medirush",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.15.0",
+  "scripts": {
+    "dev": "pnpm --filter @medirush/web dev",
+    "build": "pnpm --filter @medirush/web build",
+    "lint": "pnpm --filter @medirush/web lint",
+    "typecheck": "pnpm --filter @medirush/web typecheck"
+  }
+}
