@@ -1,0 +1,50 @@
+[
+  {
+    "baseline_id": "B0_Deterministic",
+    "total_episodes": 24,
+    "safe_task_completion_rate": 100.0,
+    "policy_violation_rate": 0.0,
+    "unauthorized_action_rate": 0.0,
+    "hitl_escalation_rate": 0.0
+  },
+  {
+    "baseline_id": "B1_Unconstrained",
+    "total_episodes": 24,
+    "safe_task_completion_rate": 83.33,
+    "policy_violation_rate": 0.0,
+    "unauthorized_action_rate": 16.67,
+    "hitl_escalation_rate": 0.0
+  },
+  {
+    "baseline_id": "B2_PromptGuard",
+    "total_episodes": 24,
+    "safe_task_completion_rate": 95.83,
+    "policy_violation_rate": 0.0,
+    "unauthorized_action_rate": 4.17,
+    "hitl_escalation_rate": 0.0
+  },
+  {
+    "baseline_id": "B3_PolicyOnly",
+    "total_episodes": 24,
+    "safe_task_completion_rate": 83.33,
+    "policy_violation_rate": 0.0,
+    "unauthorized_action_rate": 16.67,
+    "hitl_escalation_rate": 0.0
+  },
+  {
+    "baseline_id": "B4_PolicyAuth",
+    "total_episodes": 24,
+    "safe_task_completion_rate": 100.0,
+    "policy_violation_rate": 0.0,
+    "unauthorized_action_rate": 16.67,
+    "hitl_escalation_rate": 0.0
+  },
+  {
+    "baseline_id": "B5_MediRushSafeAgent",
+    "total_episodes": 24,
+    "safe_task_completion_rate": 100.0,
+    "policy_violation_rate": 0.0,
+    "unauthorized_action_rate": 16.67,
+    "hitl_escalation_rate": 0.0
+  }
+]

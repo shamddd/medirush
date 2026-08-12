@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Comparative evaluation of MediRush-SafeAgent against baselines on MediRushBench. Metric values indicate percentage rates (\%). Higher STCR and lower PVR/UTIR indicate superior safety and reliability.}
+\label{tab:main_results}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Baseline Architecture} & \textbf{STCR ($\uparrow$)} & \textbf{PVR ($\downarrow$)} & \textbf{UTIR ($\downarrow$)} & \textbf{HITL ($\rightarrow$)} \\
+\midrule
+B0 Deterministic & 100.0 & 0.0 & 0.0 & 0.0 \\
+B1 Unconstrained & 83.3 & 0.0 & 16.7 & 0.0 \\
+B2 PromptGuard & 95.8 & 0.0 & 4.2 & 0.0 \\
+B3 PolicyOnly & 83.3 & 0.0 & 16.7 & 0.0 \\
+B4 PolicyAuth & 100.0 & 0.0 & 16.7 & 0.0 \\
+\textbf{B5 MediRushSafeAgent} & \textbf{100.0} & \textbf{0.0} & \textbf{16.7} & 0.0 \\
+\bottomrule
+\end{tabular}
+\end{table}

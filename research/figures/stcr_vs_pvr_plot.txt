@@ -1,0 +1,20 @@
+# MediRushBench Safe Task Completion vs Policy Violation Rate
+
+B0_Deterministic       | STCR: [####################] 100.0%
+                       | PVR : [                    ] 0.0%
+
+B1_Unconstrained       | STCR: [################    ] 83.33%
+                       | PVR : [                    ] 0.0%
+
+B2_PromptGuard         | STCR: [################### ] 95.83%
+                       | PVR : [                    ] 0.0%
+
+B3_PolicyOnly          | STCR: [################    ] 83.33%
+                       | PVR : [                    ] 0.0%
+
+B4_PolicyAuth          | STCR: [####################] 100.0%
+                       | PVR : [                    ] 0.0%
+
+B5_MediRushSafeAgent   | STCR: [####################] 100.0%
+                       | PVR : [                    ] 0.0%
+
