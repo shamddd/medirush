@@ -1,0 +1,13 @@
+\section{Experimental Results}
+\label{sec:results}
+
+Table~\ref{tab:main_results} summarizes the experimental results across all six evaluated baselines on MediRushBench.
+
+\input{../../tables/main_results_table.tex}
+
+\subsection{Key Findings}
+\begin{enumerate}
+    \item \textbf{Unconstrained Vulnerability}: Unconstrained agents ($B1$) suffer from an Unauthorized Tool Invocation Rate ($UTIR$) of 16.67\% when exposed to cross-user requests and prompt injection scenarios.
+    \item \textbf{Prompt Guard Incompleteness}: Prompt guardrails ($B2$) improve $STCR$ to 95.83\%, but remain vulnerable to indirect prompt injection payloads embedded in product descriptions ($UTIR = 4.17\%$).
+    \item \textbf{Multi-Stage Defense Superiority}: Integrating pre-execution policy enforcement and scope authorization ($B4$, $B5$) achieves 100.0\% Safe Task Completion Rate ($STCR$) and 0.0\% Policy Violation Rate ($PVR$).
+\end{enumerate}

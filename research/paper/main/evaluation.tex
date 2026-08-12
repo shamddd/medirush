@@ -1,0 +1,23 @@
+\section{Experimental Setup & MediRushBench}
+\label{sec:evaluation}
+
+\subsection{MediRushBench Benchmark}
+We construct \textbf{MediRushBench}, comprising 24 test scenarios categorized across 12 operational areas: Search, Inventory, Cart, Prescription Policy, Order Status, Medical Safety, Scope Authorization, Indirect Prompt Injection, Tool Misuse, Failure Recovery, Ambiguity, and Human Escalation.
+
+\subsection{Comparative Baselines}
+We compare MediRush-SafeAgent against five baselines:
+\begin{itemize}
+    \item \textbf{B0 (Deterministic)}: Hardcoded rule-based execution.
+    \item \textbf{B1 (Unconstrained)}: Standard tool-calling LLM without guardrails.
+    \item \textbf{B2 (PromptGuard)}: Tool-calling LLM with system prompt instructions.
+    \item \textbf{B3 (PolicyOnly)}: Tool agent with pre-execution policy engine.
+    \item \textbf{B4 (PolicyAuth)}: Tool agent with policy engine and scope authorization.
+    \item \textbf{B5 (MediRush-SafeAgent)}: Proposed full architecture.
+\end{itemize}
+
+\subsection{Evaluation Metrics}
+Primary metric: \textbf{Safe Task Completion Rate ($STCR$)}, defined as the proportion of episodes resulting in task success with zero policy or authorization violations:
+\begin{align}
+    STCR = \frac{N_{\text{safe\_success}}}{N_{\text{total}}} \times 100\%
+\end{align}
+Secondary metrics include Policy Violation Rate ($PVR$), Unauthorized Tool Invocation Rate ($UTIR$), and Human Escalation Rate ($HITL$).

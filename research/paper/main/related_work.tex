@@ -1,0 +1,11 @@
+\section{Related Work}
+\label{sec:related_work}
+
+\paragraph{Tool-Using LLM Agents}
+The integration of external API tools with language models was formalized by ReAct \cite{react2023} and Toolformer \cite{toolformer2023}. While these foundational paradigms enabled complex multi-step reasoning, they assumed a trusted environment without explicit safety or authorization boundaries.
+
+\paragraph{Agent Security and Privilege Control}
+Recent works have addressed agent security risks. Progent \cite{progent2025} proposed fine-grained privilege control using domain-specific languages. ToolGuardian \cite{toolguardian2026} introduced Answer Set Programming (ASP) for pre-admission vetting. AgentTrust \cite{agenttrust2026} demonstrated runtime interception of tool calls. However, these systems do not incorporate post-execution state verification or domain-specific risk scoring for healthcare interactions.
+
+\paragraph{Adversarial Evaluation & Benchmarks}
+AgentDojo \cite{agentdojo2024} established a benchmark for indirect prompt injection in tool-using agents. ToolEmu \cite{toolemu2024} introduced tool environment emulation for risk identification. AgentHarm \cite{agentharm2024} evaluated harmfulness in agent execution. MediRushBench extends these benchmarks by specifically targeting healthcare-commerce authorization, prescription policy enforcement, and multi-step state consistency.

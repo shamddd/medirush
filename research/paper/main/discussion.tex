@@ -1,0 +1,6 @@
+\section{Discussion}
+\label{sec:discussion}
+
+The experimental findings demonstrate that static prompt guardrails are insufficient for high-stakes healthcare-commerce workflows. While system prompts discourage policy violations in simple contexts, they fail under indirect prompt injection attacks where adversarial payloads override context.
+
+MediRush-SafeAgent proves that deterministic runtime interception—evaluating policy rules and user scope boundaries at the API execution layer—provides complete defense against unauthorized tool execution. Furthermore, post-execution state verification ensures that even if an API call succeeds, unauthorized side-effects are detected and reverted before corrupting system state.

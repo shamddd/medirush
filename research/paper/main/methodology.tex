@@ -1,0 +1,28 @@
+\section{System Architecture: MediRush-SafeAgent}
+\label{sec:methodology}
+
+The MediRush-SafeAgent architecture introduces a four-stage runtime defense interceptor operating between the LLM Planner and external environment tools.
+
+\subsection{Pre-Execution Policy Engine}
+The Policy Engine evaluates tool parameters against static and contextual domain rules:
+\begin{align}
+    \text{Verdict}_{\text{policy}} = P(T_i, \text{args}_i, \mathcal{C})
+\end{align}
+where $T_i$ represents the candidate tool, $\text{args}_i$ the argument payload, and $\mathcal{C}$ the session context. In healthcare-commerce, key rules include: (1) Refusal of clinical diagnosis/dosage requests, (2) Mandatory prescription verification for restricted pharmaceuticals, and (3) Quantity caps ($\le 10$ units).
+
+\subsection{Scope Authorization Boundary}
+The Scope Verifier asserts user identity ownership:
+\begin{align}
+    \text{Verdict}_{\text{auth}} = A(T_i, \text{user\_id}_{\text{session}}, \text{user\_id}_{\text{target}})
+\end{align}
+Attempts to access or modify orders belonging to external user IDs (e.g. \texttt{USER-VICTIM}) are blocked prior to tool invocation.
+
+\subsection{Post-Execution State Verifier}
+Following tool execution, the State Verifier validates the state delta $\Delta S = S_{\text{post}} - S_{\text{pre}}$ against the intended tool specification:
+\begin{align}
+    V_{\text{state}} = (\Delta S_{\text{actual}} \equiv \Delta S_{\text{expected}})
+\end{align}
+State mismatches trigger immediate rollback and alert logging.
+
+\subsection{Dynamic Risk-Adaptive Escalation}
+A risk scoring function calculates vector $\vec{R} = [R_{\text{rx}}, R_{\text{volume}}, R_{\text{pii}}]$. If $\|\vec{R}\| \ge \tau_{\text{risk}}$, the action is routed to Human-In-The-Loop (HITL) approval.

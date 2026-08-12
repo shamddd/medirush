@@ -1,0 +1,18 @@
+\section{Introduction}
+\label{sec:intro}
+
+Large Language Model (LLM) agents have evolved beyond passive text generation toward autonomous task execution via external tool interfaces \cite{react2023, toolformer2023}. When applied to digital healthcare-commerce—such as localized medicine search, inventory inspection, prescription verification, and order processing—autonomous agents offer substantial efficiency gains for consumers and healthcare providers.
+
+However, operating autonomous tool-calling agents in domain-restricted environments introduces severe security vulnerabilities. Unconstrained LLM agents are susceptible to \emph{indirect prompt injections} embedded in product descriptions or pharmacy metadata \cite{agentdojo2024}, \emph{permission laundering} across multi-step tool calls \cite{chaincaps2025}, and \emph{cross-user data exfiltration} \cite{agentharm2024}. In healthcare-commerce, an unmitigated tool call could result in unauthorized cart placement of prescription-only medications or exposure of personal health order details.
+
+Prior defensive approaches have primarily relied on static prompt guardrails or generic system privilege Domain-Specific Languages (DSLs) \cite{progent2025, toolguardian2026}. However, prompt guardrails remain vulnerable to jailbreaks, while generic privilege engines lack awareness of domain-specific state transitions (e.g., verifying physician prescription credentials prior to inventory allocation).
+
+To address these challenges, we introduce \textbf{MediRush-SafeAgent}, a multi-stage defense architecture tailored for safe healthcare-commerce interactions. MediRush-SafeAgent enforces a formal four-layer defense pipeline:
+\begin{enumerate}
+    \item \textbf{Pre-Execution Domain Policy Engine}: Enforces non-negotiable domain rules (e.g., medical advice refusal, prescription verification, and order volume limits).
+    \item \textbf{Scope Authorization Boundary}: Validates user identity and resource ownership scope before dispatching API calls.
+    \item \textbf{Post-Execution State Verifier}: Inspects environment state deltas following tool execution to ensure side-effects match expected outcomes.
+    \item \textbf{Dynamic Risk-Adaptive Escalation}: Calculates a dynamic risk vector $\vec{R}$ to escalate high-risk transactions to human approval while maintaining autonomous throughput for low-risk Over-The-Counter (OTC) requests.
+\end{enumerate}
+
+Furthermore, we introduce \textbf{MediRushBench}, a standardized evaluation benchmark featuring 24 scenario cases spanning 12 operational and security categories. Our empirical results demonstrate that MediRush-SafeAgent achieves a 100.0\% Safe Task Completion Rate ($STCR$) and 0.0\% Policy Violation Rate ($PVR$), establishing a robust paradigm for policy-constrained LLM tool deployment.
