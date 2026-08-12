@@ -1,0 +1,58 @@
+\documentclass[preprint,12pt]{elsarticle}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{lineno}
+\usepackage{hyperref}
+
+\journal{Artificial Intelligence in Medicine}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{MediRush-SafeAgent: A Policy-Constrained Multi-Stage Defense Framework for Reliable Healthcare-Commerce LLM Tool Execution}
+
+\author[inst1]{Sham Satish Thakare\corref{cor1}}
+\ead{151498087+shamddd@users.noreply.github.com}
+\cortext[cor1]{Corresponding author}
+
+\affiliation[inst1]{organization={Independent Researcher},
+            country={India}}
+
+\begin{abstract}
+Autonomous tool-using Large Language Model (LLM) agents are increasingly deployed in complex domain-specific workflows. However, deploying agents in healthcare-commerce applications presents critical security and policy challenges, including unauthorized order modifications, prescription bypasses, cross-user data exposure, and indirect prompt injections. In this paper, we present \textbf{MediRush-SafeAgent}, a formal multi-stage runtime framework designed to guarantee policy-constrained, authorized, and reliable tool execution in healthcare-commerce workflows. MediRush-SafeAgent integrates a pre-execution domain policy engine, a strict scope authorization verifier, a post-execution environment state verifier, and dynamic risk-adaptive human escalation. We construct \textbf{MediRushBench}, a standardized evaluation benchmark comprising 24 scenarios across 12 operational and security categories. Our empirical evaluation demonstrates that MediRush-SafeAgent achieves a 100.0\% Safe Task Completion Rate ($STCR$) and 0.0\% Policy Violation Rate ($PVR$), outperforming unconstrained LLM baselines ($STCR = 83.33\%$, $UTIR = 16.67\%$) and prompt-guardrail baselines ($STCR = 95.83\%$). These results establish the efficacy of joint multi-stage runtime interception for domain-constrained agent safety.
+\end{abstract}
+
+\begin{keyword}
+AI Agent Safety \sep Tool Execution Interception \sep Healthcare-Commerce Workflows \sep Dynamic Risk Assessment \sep Prompt Injection Resiliency \sep Operational Policy Enforcement
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\input{../main/introduction.tex}
+\input{../main/related_work.tex}
+\input{../main/methodology.tex}
+\input{../main/evaluation.tex}
+\input{../main/results.tex}
+\input{../main/discussion.tex}
+\input{../main/limitations.tex}
+\input{../main/ethics.tex}
+\input{../main/conclusion.tex}
+
+\section*{Declaration of Competing Interest}
+The author declares that he has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data and Code Availability}
+The benchmark datasets, baseline implementations, evaluation metrics, and experimental reproduction scripts associated with this study are publicly available at \url{https://github.com/shamddd/medirush}.
+
+\section*{Declaration of Generative AI and AI-Assisted Technologies}
+During the preparation of this work the author used AI assistant tools in order to assist with manuscript LaTeX template formatting, bibliography formatting, and code structuring. After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the publication.
+
+\bibliographystyle{elsarticle-num}
+\bibliography{../main/references}
+
+\end{document}

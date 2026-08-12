@@ -1,0 +1,5 @@
+• A 4-stage runtime defense framework for healthcare-commerce AI agents.
+• Enforces pre-execution policy, scope authorization, and post-state verification.
+• Dynamic risk scoring routes high-risk tasks to human-in-the-loop approval.
+• MediRushBench evaluates 24 scenarios across 12 security categories.
+• Achieves 100.0% Safe Task Completion and 0.0% Policy Violation Rate.

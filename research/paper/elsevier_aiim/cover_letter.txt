@@ -1,0 +1,21 @@
+Dear Editor-in-Chief and Editorial Board,
+Artificial Intelligence in Medicine (Elsevier)
+
+RE: Submission of Original Research Manuscript "MediRush-SafeAgent: A Policy-Constrained Multi-Stage Defense Framework for Reliable Healthcare-Commerce LLM Tool Execution"
+
+I am pleased to submit our original research manuscript titled "MediRush-SafeAgent: A Policy-Constrained Multi-Stage Defense Framework for Reliable Healthcare-Commerce LLM Tool Execution" for publication as a regular research article in Artificial Intelligence in Medicine.
+
+Large Language Model (LLM) agents are rapidly transitioning from text generation to active execution via external tool interfaces. When applied to digital healthcare-commerce—such as medicine search, inventory checking, and order processing—unconstrained tool calling introduces critical risks, including unauthorized prescription additions, cross-user data exposure, and indirect prompt injection attacks. 
+
+In this work, we present MediRush-SafeAgent, a formal four-stage runtime defense framework that enforces pre-execution domain policy rules, scope authorization boundaries, post-execution environment state verification, and dynamic risk-adaptive human-in-the-loop escalation. We also introduce MediRushBench, a standardized benchmark comprising 24 scenario cases across 12 operational and security categories. Our empirical results demonstrate that MediRush-SafeAgent achieves a 100.0% Safe Task Completion Rate (STCR) and 0.0% Policy Violation Rate (PVR), outperforming unconstrained LLM baselines (STCR = 83.33%) and static prompt-guardrail baselines (STCR = 95.83%).
+
+This manuscript has not been published previously, is not under consideration for publication elsewhere, and its publication has been approved by the author. I confirm that all research protocols, software baselines, and evaluation datasets are fully open-sourced for peer-review reproduction at https://github.com/shamddd/medirush.
+
+Thank you for considering our work for publication in Artificial Intelligence in Medicine.
+
+Sincerely,
+
+Sham Satish Thakare
+Independent Researcher
+Email: 151498087+shamddd@users.noreply.github.com
+GitHub: https://github.com/shamddd
