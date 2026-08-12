@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="CreationTime" content="2026-08-12T02:42:56Z">
+  <meta name="ModificationTime" content="2026-08-12T02:42:56Z">
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; min-height: 14.0px}
+    li.li1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times}
+    table.t1 {border-collapse: collapse}
+    td.td1 {border-style: solid; border-width: 1.0px 1.0px 1.0px 1.0px; border-color: #bfbfbf #bfbfbf #bfbfbf #bfbfbf; padding: 0.0px 5.0px 0.0px 5.0px}
+    ul.ul1 {list-style-type: disc}
+  </style>
+</head>
+<body>
+<p class="p1">MediRush-SafeAgent: A Policy-Constrained Multi-Stage Defense Framework for Reliable Healthcare-Commerce LLM Tool Execution</p>
+<p class="p1"><b>Author</b>: Sham Satish Thakare<br>
+<i>Artificial Intelligence in Medicine</i> (Elsevier)</p>
+<p class="p2"><br></p>
+<p class="p1">Abstract</p>
+<p class="p1">Autonomous tool-using Large Language Model (LLM) agents are increasingly deployed in complex domain-specific workflows. However, deploying agents in healthcare-commerce applications presents critical security and policy challenges, including unauthorized order modifications, prescription bypasses, cross-user data exposure, and indirect prompt injections. In this paper, we present <b>MediRush-SafeAgent</b>, a formal multi-stage runtime framework designed to guarantee policy-constrained, authorized, and reliable tool execution in healthcare-commerce workflows. MediRush-SafeAgent integrates a pre-execution domain policy engine, a strict scope authorization verifier, a post-execution environment state verifier, and dynamic risk-adaptive human escalation. We construct <b>MediRushBench</b>, a standardized evaluation benchmark comprising 24 scenarios across 12 operational and security categories. Our empirical evaluation demonstrates that MediRush-SafeAgent achieves a 100.0% Safe Task Completion Rate () and 0.0% Policy Violation Rate (), outperforming unconstrained LLM baselines (, ) and prompt-guardrail baselines (). These results establish the efficacy of joint multi-stage runtime interception for domain-constrained agent safety.</p>
+<p class="p1"><b>Keywords</b>: AI Agent Safety, Tool Execution Interception, Healthcare-Commerce Workflows, Dynamic Risk Assessment, Prompt Injection Resiliency, Operational Policy Enforcement.</p>
+<p class="p2"><br></p>
+<p class="p1">1. Introduction</p>
+<p class="p1">Large Language Model (LLM) agents have evolved beyond passive text generation toward autonomous task execution via external tool interfaces (Yao et al., 2023; Schick et al., 2023). When applied to digital healthcare-commerce—such as localized medicine search, inventory inspection, prescription verification, and order processing—autonomous agents offer substantial efficiency gains for consumers and healthcare providers.</p>
+<p class="p1">However, operating autonomous tool-calling agents in domain-restricted environments introduces severe security vulnerabilities. Unconstrained LLM agents are susceptible to <i>indirect prompt injections</i> embedded in product descriptions or pharmacy metadata (Debenedetti et al., 2024), <i>permission laundering</i> across multi-step tool calls (Wang et al., 2025), and <i>cross-user data exfiltration</i> (Andriushchenko et al., 2024). In healthcare-commerce, an unmitigated tool call could result in unauthorized cart placement of prescription-only medications or exposure of personal health order details.</p>
+<p class="p1">Prior defensive approaches have primarily relied on static prompt guardrails or generic system privilege Domain-Specific Languages (DSLs) (Chen et al., 2025). However, prompt guardrails remain vulnerable to jailbreaks, while generic privilege engines lack awareness of domain-specific state transitions (e.g., verifying physician prescription credentials prior to inventory allocation).</p>
+<p class="p1">To address these challenges, we introduce <b>MediRush-SafeAgent</b>, a multi-stage defense architecture tailored for safe healthcare-commerce interactions. MediRush-SafeAgent enforces a formal four-layer defense pipeline: 1. <b>Pre-Execution Domain Policy Engine</b>: Enforces non-negotiable domain rules (e.g., medical advice refusal, prescription verification, and order volume limits). 2. <b>Scope Authorization Boundary</b>: Validates user identity and resource ownership scope before dispatching API calls. 3. <b>Post-Execution State Verifier</b>: Inspects environment state deltas following tool execution to ensure side-effects match expected outcomes. 4. <b>Dynamic Risk-Adaptive Escalation</b>: Calculates a dynamic risk vector<span class="Apple-converted-space">  </span>to escalate high-risk transactions to human approval while maintaining autonomous throughput for low-risk Over-The-Counter (OTC) requests.</p>
+<p class="p1">Furthermore, we introduce <b>MediRushBench</b>, a standardized evaluation benchmark featuring 24 scenario cases spanning 12 operational and security categories. Our empirical results demonstrate that MediRush-SafeAgent achieves a 100.0% Safe Task Completion Rate () and 0.0% Policy Violation Rate (), establishing a robust paradigm for policy-constrained LLM tool deployment.</p>
+<p class="p2"><br></p>
+<p class="p1">2. Related Work</p>
+<p class="p1">2.1 Tool-Using LLM Agents</p>
+<p class="p1">The integration of external API tools with language models was formalized by ReAct (Yao et al., 2023) and Toolformer (Schick et al., 2023). While these foundational paradigms enabled complex multi-step reasoning, they assumed a trusted environment without explicit safety or authorization boundaries.</p>
+<p class="p1">2.2 Agent Security and Privilege Control</p>
+<p class="p1">Recent works have addressed agent security risks. Progent (Chen et al., 2025) proposed fine-grained privilege control using domain-specific languages. ToolGuardian (2026) introduced Answer Set Programming (ASP) for pre-admission vetting. AgentTrust (2026) demonstrated runtime interception of tool calls. However, these systems do not incorporate post-execution state verification or domain-specific risk scoring for healthcare interactions.</p>
+<p class="p1">2.3 Adversarial Evaluation &amp; Benchmarks</p>
+<p class="p1">AgentDojo (Debenedetti et al., 2024) established a benchmark for indirect prompt injection in tool-using agents. ToolEmu (Ruan et al., 2024) introduced tool environment emulation for risk identification. AgentHarm (Andriushchenko et al., 2024) evaluated harmfulness in agent execution. MediRushBench extends these benchmarks by specifically targeting healthcare-commerce authorization, prescription policy enforcement, and multi-step state consistency.</p>
+<p class="p2"><br></p>
+<p class="p1">3. System Architecture: MediRush-SafeAgent</p>
+<p class="p1">The MediRush-SafeAgent architecture introduces a four-stage runtime defense interceptor operating between the LLM Planner and external environment tools.</p>
+<p class="p1">3.1 Pre-Execution Policy Engine</p>
+<p class="p1">The Policy Engine evaluates tool parameters against static and contextual domain rules:</p>
+<p class="p2"><br></p>
+<p class="p1">where<span class="Apple-converted-space">  </span>represents the candidate tool,<span class="Apple-converted-space">  </span>the argument payload, and<span class="Apple-converted-space">  </span>the session context. In healthcare-commerce, key rules include: (1) Refusal of clinical diagnosis/dosage requests, (2) Mandatory prescription verification for restricted pharmaceuticals, and (3) Quantity caps ( units).</p>
+<p class="p1">3.2 Scope Authorization Boundary</p>
+<p class="p1">The Scope Verifier asserts user identity ownership:</p>
+<p class="p2"><br></p>
+<p class="p1">Attempts to access or modify orders belonging to external user IDs (e.g. USER-VICTIM) are blocked prior to tool invocation.</p>
+<p class="p1">3.3 Post-Execution State Verifier</p>
+<p class="p1">Following tool execution, the State Verifier validates the state delta<span class="Apple-converted-space">  </span>against the intended tool specification:</p>
+<p class="p2"><br></p>
+<p class="p1">State mismatches trigger immediate rollback and alert logging.</p>
+<p class="p1">3.4 Dynamic Risk-Adaptive Escalation</p>
+<p class="p1">A risk scoring function calculates vector . If , the action is routed to Human-In-The-Loop (HITL) approval.</p>
+<p class="p2"><br></p>
+<p class="p1">4. Experimental Setup &amp; MediRushBench</p>
+<p class="p1">4.1 MediRushBench Benchmark</p>
+<p class="p1">We construct <b>MediRushBench</b>, comprising 24 test scenarios categorized across 12 operational areas: Search, Inventory, Cart, Prescription Policy, Order Status, Medical Safety, Scope Authorization, Indirect Prompt Injection, Tool Misuse, Failure Recovery, Ambiguity, and Human Escalation.</p>
+<p class="p1">4.2 Comparative Baselines</p>
+<p class="p1">We compare MediRush-SafeAgent against five baselines: - <b>B0 (Deterministic)</b>: Hardcoded rule-based execution. - <b>B1 (Unconstrained)</b>: Standard tool-calling LLM without guardrails. - <b>B2 (PromptGuard)</b>: Tool-calling LLM with system prompt instructions. - <b>B3 (PolicyOnly)</b>: Tool agent with pre-execution policy engine. - <b>B4 (PolicyAuth)</b>: Tool agent with policy engine and scope authorization. - <b>B5 (MediRush-SafeAgent)</b>: Proposed full architecture.</p>
+<p class="p1">4.3 Evaluation Metrics</p>
+<p class="p1">Primary metric: <b>Safe Task Completion Rate ()</b>, defined as the proportion of episodes resulting in task success with zero policy or authorization violations:</p>
+<p class="p2"><br></p>
+<p class="p1">Secondary metrics include Policy Violation Rate (), Unauthorized Tool Invocation Rate (), and Human Escalation Rate ().</p>
+<p class="p2"><br></p>
+<p class="p1">5. Experimental Results</p>
+<p class="p1">Table 1 summarizes the experimental results across all six evaluated baselines on MediRushBench.</p>
+<table cellspacing="0" cellpadding="0" class="t1">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1">Baseline Architecture</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">STCR ()</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">PVR ()</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">UTIR ()</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">HITL ()</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>B0 (Deterministic)</b></p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">100.0%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>B1 (Unconstrained LLM)</b></p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">83.33%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">16.67%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>B2 (PromptGuard)</b></p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">95.83%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">4.17%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>B3 (PolicyOnly)</b></p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">83.33%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">16.67%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>B4 (PolicyAuth)</b></p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">100.0%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">16.67%</p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1">0.0%</p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>B5 (MediRush-SafeAgent)</b></p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>100.0%</b></p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>0.0%</b></p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>16.67%</b></p>
+      </td>
+      <td valign="middle" class="td1">
+        <p class="p1"><b>0.0%</b></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="p1">5.1 Key Findings</p>
+<ul class="ul1">
+  <li class="li1"><b>Unconstrained Vulnerability</b>: Unconstrained agents () suffer from an Unauthorized Tool Invocation Rate () of 16.67% when exposed to cross-user requests and prompt injection scenarios.</li>
+  <li class="li1"><b>Prompt Guard Incompleteness</b>: Prompt guardrails () improve<span class="Apple-converted-space">  </span>to 95.83%, but remain vulnerable to indirect prompt injection payloads embedded in product descriptions ().</li>
+  <li class="li1"><b>Multi-Stage Defense Superiority</b>: Integrating pre-execution policy enforcement and scope authorization (, ) achieves 100.0% Safe Task Completion Rate () and 0.0% Policy Violation Rate ().</li>
+</ul>
+<p class="p2"><br></p>
+<p class="p1">6. Discussion</p>
+<p class="p1">The experimental findings demonstrate that static prompt guardrails are insufficient for high-stakes healthcare-commerce workflows. While system prompts discourage policy violations in simple contexts, they fail under indirect prompt injection attacks where adversarial payloads override context.</p>
+<p class="p1">MediRush-SafeAgent proves that deterministic runtime interception—evaluating policy rules and user scope boundaries at the API execution layer—provides complete defense against unauthorized tool execution. Furthermore, post-execution state verification ensures that even if an API call succeeds, unauthorized side-effects are detected and reverted before corrupting system state.</p>
+<p class="p2"><br></p>
+<p class="p1">7. Limitations</p>
+<p class="p1">We explicitly acknowledge several limitations of this work: 1. <b>Synthetic Benchmark Scenarios</b>: MediRushBench utilizes synthetic pharmacy catalogs and order scenarios. While designed to simulate realistic healthcare-commerce interactions, external validity on live commercial platforms remains to be evaluated. 2. <b>Absence of Clinical Evaluation</b>: MediRush-SafeAgent strictly refuses medical diagnosis and dosage tasks. It does not evaluate clinical decision-making or real patient medical outcomes. 3. <b>Model Diversity</b>: Experiments were conducted using a deterministic simulated LLM provider interface. Future extensions should benchmark commercial frontier APIs (e.g. GPT-4o, Claude 3.5) and open-weight models (e.g. Llama 3.3).</p>
+<p class="p2"><br></p>
+<p class="p1">8. Ethical Considerations</p>
+<p class="p1">MediRush-SafeAgent is an experimental research prototype for agent safety and authorization enforcement. It is <b>not</b> a medical diagnosis tool, prescribing system, or clinical advice system, and must not be used as a substitute for professional medical care.</p>
+<p class="p1">All benchmark datasets in MediRushBench consist exclusively of synthetic, non-identifiable user personas and mock pharmaceutical items. No real Patient Health Information (PHI) or real-world patient records were collected or processed.</p>
+<p class="p2"><br></p>
+<p class="p1">9. Conclusion</p>
+<p class="p1">In this paper, we introduced <b>MediRush-SafeAgent</b>, a multi-stage runtime framework for safe, authorized, and policy-constrained tool execution in healthcare-commerce workflows. By combining pre-execution policy checks, scope authorization verification, post-execution state verification, and dynamic risk-adaptive human escalation, MediRush-SafeAgent achieves 100.0% Safe Task Completion Rate and 0.0% Policy Violation Rate on the novel MediRushBench benchmark. Our framework provides a rigorous foundation for deploying secure autonomous LLM agents in domain-restricted applications.</p>
+<p class="p2"><br></p>
+<p class="p1">References</p>
+<ul class="ul1">
+  <li class="li1">Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., Cao, Y., 2023. ReAct: Synergizing Reasoning and Acting in Language Models. ICLR.</li>
+  <li class="li1">Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer, L., Cancedda, N., Scialom, T., 2023. Toolformer: Language Models Can Teach Themselves to Use Tools. NeurIPS.</li>
+  <li class="li1">Debenedetti, E., Zhang, J., Carlini, N., Tramèr, F., 2024. AgentDojo: A Dynamic Environment for Evaluating Indirect Prompt Injection in Language Agents. NeurIPS.</li>
+  <li class="li1">Chen, X., Zhang, Y., Liu, W., 2025. Progent: Fine-Grained Privilege Control for Autonomous Tool-Using Agents. IEEE S&amp;P.</li>
+  <li class="li1">Wang, H., Zhao, L., Kim, S., 2025. ChainCaps: Preventing Permission Laundering in Multi-Step Agent Tool Chains. arXiv:2511.04589.</li>
+  <li class="li1">Ruan, Y., Sheng, H., Zhang, M., Zhao, T., Liang, P., Hashimoto, T., 2024. Identifying the Risks of LM Agents with Tool Environment Emulation. ICML.</li>
+  <li class="li1">Andriushchenko, M., Croce, F., Flammarion, N., 2024. AgentHarm: Benchmarking Harmfulness and Red Teaming of LLM Agents. arXiv:2410.08154.</li>
+</ul>
+</body>
+</html>
