@@ -1,0 +1,9 @@
+Paper,Year,Venue,Core Focus,Tool Support,Policy Engine,Scope Auth,State Verification,HITL Escalation,Adversarial Eval,Healthcare Scope,MediRush Gap
+AgentTrust,2026,arXiv,Runtime tool call interception,Yes,Yes,No,No,Partial,Yes,No,Lacks post-state verifier and healthcare domain rules
+ToolGuardian,2026,arXiv,ASP-based pre-admission vetting,Yes,Yes,Partial,No,No,Yes,No,Lacks dynamic risk scoring and HITL escalation
+SafeHarness,2026,arXiv,Tiered causal verification,Yes,Partial,Yes,Yes,No,Yes,No,Lacks healthcare commerce constraint verification
+Progent,2025,IEEE S&P,DSL privilege control for tools,Yes,Yes,Yes,No,No,Yes,No,Domain-agnostic privilege DSL without state verification
+ChainCaps,2025,arXiv,Permission laundering prevention,Yes,Yes,Yes,No,No,Partial,No,Focused strictly on capability propagation across chains
+AgentDojo,2024,NeurIPS,Indirect prompt injection benchmark,Yes,No,No,No,No,Yes,No,Benchmark dataset without defense runtime architecture
+ToolEmu,2024,ICML,Tool safety risk emulation,Yes,No,No,No,No,Yes,No,Emulation sandbox without active policy enforcement
+MediRush-SafeAgent,2026,Target (AAAI/AAMAS),Policy-constrained safe healthcare-commerce agent,Yes,Yes,Yes,Yes,Yes,Yes,Yes,Unified joint defense for healthcare-commerce tool workflows
